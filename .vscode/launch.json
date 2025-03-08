@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node",
+            "node": {
+                "package": "${workspaceFolder}/vahanar/node_modules/eslint-config-next/package.json",
+                "localRoot": "${workspaceFolder}/vahanar/node_modules/eslint-config-next"
+            }
+        }
+    ]
+}

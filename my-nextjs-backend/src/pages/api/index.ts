@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    switch (req.method) {
+    const { method } = req;
+
+    switch (method) {
         case 'GET':
             // Handle GET request
             res.status(200).json({ message: 'GET request successful' });
@@ -13,7 +15,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             break;
         default:
             res.setHeader('Allow', ['GET', 'POST']);
-            res.status(405).end(`Method ${req.method} Not Allowed`);
+            res.status(405).end(`Method ${method} Not Allowed`);
             break;
     }
 }

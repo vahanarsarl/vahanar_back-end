@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import styles from '../styles/ResetPasswordPage.module.css';
 
 const ResetPasswordPage = () => {
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const router = useRouter();
   const { token } = router.query;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (newPassword !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
 
     const res = await fetch('/api/resetPassword', {
       method: 'POST',
@@ -27,17 +34,36 @@ const ResetPasswordPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Reset Password</h1>
-      <input
-        type="password"
-        placeholder="New Password"
-        value={newPassword}
-        onChange={(e) => setNewPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Reset Password</button>
-    </form>
+    <div className={styles.container}>
+      <h1>Create Password</h1>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <input
+          type="password"
+          placeholder="Create password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          required
+          className={styles.input}
+        />
+        <input
+          type="password"
+          placeholder="Confirm password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+          className={styles.input}
+        />
+        <div className={styles.checkboxContainer}>
+          <input type="checkbox" required />
+          <span>
+            By tapping on Checking this button, you agreeing to the Vahana{' '}
+            <a href="/terms">Terms of Service</a> and{' '}
+            <a href="/privacy">privacy policy</a>.
+          </span>
+        </div>
+        <button type="submit" className={styles.button}>Sign Up</button>
+      </form>
+    </div>
   );
 };
 

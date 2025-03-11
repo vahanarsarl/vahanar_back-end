@@ -1,6 +1,6 @@
 import { User } from '../../models';
 import jwt from 'jsonwebtoken';
-import db from '../../config/database';
+import db from '../../config/config.json';
 
 export default async (req, res) => {
   const { email, password } = req.body;

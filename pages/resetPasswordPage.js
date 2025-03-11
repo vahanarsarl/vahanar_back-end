@@ -35,7 +35,7 @@ const ResetPasswordPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Create Password</h1>
+      <h1 className={styles.title}>Create Password</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="password"
